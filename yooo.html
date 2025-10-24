@@ -3,215 +3,254 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Photo Wall Memory — Oryza & Stefhani</title>
+  <title>Oryza & Stefhani — Photo Wall Memory</title>
   <style>
-    :root{
-      --bg1: #ffeef2; /* soft pink */
-      --bg2: #ffd6e6;
-      --card: #ffffff;
+    :root {
+      --bg1: #fff9e6; /* kuning lembut */
+      --bg2: #ffe7b3;
       --accent: #ff7aa2;
-      --muted: #8b6a74;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    body{
-      background: linear-gradient(180deg,var(--bg1),var(--bg2));
-      -webkit-font-smoothing:antialiased;
-      color:#3b2a2f;
-      padding:24px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
+      --caption-bg: #ffd6e6;
     }
 
-    .wrap{
-      width:100%;
-      max-width:1000px;
-      background:transparent;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: #3b2a2f;
+      display: flex;
+      justify-content: center;
+      padding: 24px;
     }
 
-    header{
-      text-align:center;
-      margin-bottom:20px;
+    .wrap {
+      width: 100%;
+      max-width: 1000px;
     }
-    .title{
-      display:inline-block;
-      padding:14px 20px;
-      border-radius:16px;
-      background:rgba(255,255,255,0.65);
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      display: inline-block;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(6px);
-      box-shadow:0 6px 18px rgba(0,0,0,0.06);
-    }
-    .title h1{font-size:20px;margin:0;letter-spacing:0.3px}
-    .subtitle{font-size:13px;color:var(--muted);margin-top:6px}
-
-    /* grid */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     }
 
-    .photo{
-      position:relative;
-      border-radius:12px;
-      overflow:hidden;
-      background:linear-gradient(135deg,#fff 0%, #fff0 60%);
-      box-shadow:0 6px 18px rgba(48,24,34,0.06);
-      cursor:pointer;
-      min-height:140px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .photo img{width:100%;height:100%;object-fit:cover;display:block}
-    .photo .caption{
-      position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.35));color:#fff;font-size:13px
+    .title h1 {
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: 0.3px;
     }
 
-    /* hint */
-    .hint{margin:12px 0 18px;color:#5b3b41;font-size:14px;text-align:center}
-
-    /* modal/lightbox */
-    .lightbox{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;z-index:999;
-      background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
-    }
-    .lightbox.open{display:flex}
-    .lb-card{
-      max-width:940px;width:100%;max-height:90vh;border-radius:12px;background:var(--card);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);display:flex;flex-direction:column
-    }
-    .lb-media{flex:1;display:flex;align-items:center;justify-content:center;background:#000}
-    .lb-media img{max-width:100%;max-height:80vh;object-fit:contain}
-    .lb-meta{padding:12px 14px;border-top:1px solid #f0e6e8;display:flex;align-items:center;justify-content:space-between}
-    .lb-meta .text{font-size:14px;color:#35272a}
-    .lb-meta .controls{display:flex;gap:8px}
-
-    .btn{appearance:none;border:0;padding:8px 12px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#ff5d87);color:#fff;font-weight:600;cursor:pointer}
-    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2);font-weight:600}
-    .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;color:var(--muted);cursor:pointer}
-
-    /* responsive tweaks */
-    @media (max-width:520px){
-      .title h1{font-size:16px}
-      .grid{gap:10px}
+    /* grid foto */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 14px;
     }
 
-    /* placeholder style when using inline svg */
-    .placeholder{display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-weight:700}
+    .photo {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(48, 24, 34, 0.1);
+      cursor: pointer;
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lb-card {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lb-media {
+      flex: 1;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lb-media img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    .lb-caption {
+      background: var(--caption-bg);
+      color: #4b2a34;
+      padding: 12px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: rgba(255,255,255,0.8);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Tombol saklar musik */
+    .music-switch {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      border-radius: 30px;
+      width: 60px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .music-switch span {
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    .music-switch.playing span {
+      transform: translateX(28px);
+      background: #4CAF50;
+    }
+
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <div class="title">
-        <h1>stefhani Linggom Liontine Shophia Haloho</h1>
-        <div class="subtitle">Photo Wall Memory — kenangan kita dalam satu tempat</div>
+        <h1>Stefhani Linggom Liontine Sophia Haloho</h1>
       </div>
     </header>
 
     <main>
       <div class="grid" id="grid">
-        <!-- Photo items: ganti atribut data-src dan data-caption dengan foto kalian. -->
-
-        <!-- Contoh placeholder menggunakan inline SVG. Untuk mengganti foto, ubah data-src ke URL gambar (mis. "images/photo1.jpg") dan tambahkan <img> tag di dalam .photo. -->
-
-        <div class="photo" tabindex="0" data-src="pani.jpg" data-caption="wleee">
-          <!-- Replace this SVG with an <img src="..."> when you add real photos -->
-         <img src="pani.jpg" alt="wleee">
-          <div class="caption">KANGENNNNNNN</div>
+        <!-- Foto 1 -->
+        <div class="photo" data-src="pani.jpg" data-caption="KANGENNNNNNN">
+          <img src="pani.jpg" alt="wleee">
         </div>
-        <!-- Tambah lebih banyak .photo sesuai kebutuhan -->
+
       </div>
     </main>
   </div>
 
-  <!-- Lightbox / modal -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lb-card" role="dialog" aria-modal="true" aria-labelledby="lb-caption">
-      <div class="lb-media" id="lb-media">
-        <!-- image injected here -->
-      </div>
-      <div class="lb-meta">
-        <div class="text" id="lb-caption">Caption</div>
-        <div class="controls">
-          <button class="icon-btn" id="prev" title="Sebelumnya">◀</button>
-          <button class="icon-btn" id="next" title="Berikutnya">▶</button>
-          <button class="btn" id="close">Tutup</button>
-        </div>
-      </div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="close-btn" id="close">✕</button>
+    <div class="lb-card">
+      <div class="lb-media" id="lb-media"></div>
+      <div class="lb-caption" id="lb-caption"></div>
     </div>
   </div>
 
+  <!-- Audio (lagu kamu) -->
+  <audio id="bgMusic" src="Kasih Putih (Acoustic).mp3" loop></audio>
+
+  <!-- Saklar musik -->
+  <div class="music-switch" id="musicSwitch" title="Putar / Hentikan lagu">
+    <span></span>
+  </div>
+
   <script>
-    // Basic lightbox logic
+    // LIGHTBOX
     const photos = Array.from(document.querySelectorAll('.photo'));
     const lb = document.getElementById('lightbox');
     const lbMedia = document.getElementById('lb-media');
     const lbCaption = document.getElementById('lb-caption');
+    const btnClose = document.getElementById('close');
     let currentIndex = 0;
 
-    function openLightbox(index){
+    function openLightbox(index) {
       const item = photos[index];
       const src = item.dataset.src;
       const caption = item.dataset.caption || '';
-
-      lbMedia.innerHTML = '';
-      // If user provides a real src (not placeholder), use <img>. Otherwise clone innerHTML placeholder.
-      if(src && !src.startsWith('images/')){
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = caption;
-        lbMedia.appendChild(img);
-      } else {
-        // clone the photo content (placeholder) for demo
-        const clone = item.querySelector('svg') ? item.querySelector('svg').cloneNode(true) : null;
-        if(clone) lbMedia.appendChild(clone);
-      }
-
+      lbMedia.innerHTML = `<img src="${src}" alt="${caption}">`;
       lbCaption.textContent = caption;
       lb.classList.add('open');
-      lb.setAttribute('aria-hidden','false');
       currentIndex = index;
     }
 
-    function closeLightbox(){
+    function closeLightbox() {
       lb.classList.remove('open');
-      lb.setAttribute('aria-hidden','true');
       lbMedia.innerHTML = '';
+      lbCaption.textContent = '';
     }
 
-    photos.forEach((p, idx) => {
-      p.addEventListener('click', ()=> openLightbox(idx));
-      p.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openLightbox(idx)});
+    photos.forEach((p, i) => p.addEventListener('click', () => openLightbox(i)));
+    btnClose.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
     });
 
-    document.getElementById('close').addEventListener('click', closeLightbox);
-    document.getElementById('prev').addEventListener('click', ()=> openLightbox((currentIndex-1+photos.length)%photos.length));
-    document.getElementById('next').addEventListener('click', ()=> openLightbox((currentIndex+1)%photos.length));
+    // MUSIK SWITCH
+    const music = document.getElementById('bgMusic');
+    const switchBtn = document.getElementById('musicSwitch');
+    let isPlaying = false;
 
-    // close when clicking outside card
-    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
-
-    // keyboard nav
-    document.addEventListener('keydown', (e)=>{
-      if(!lb.classList.contains('open')) return;
-      if(e.key === 'Escape') closeLightbox();
-      if(e.key === 'ArrowLeft') document.getElementById('prev').click();
-      if(e.key === 'ArrowRight') document.getElementById('next').click();
+    switchBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        switchBtn.classList.remove('playing');
+      } else {
+        music.play();
+        switchBtn.classList.add('playing');
+      }
+      isPlaying = !isPlaying;
     });
-
-    // Helper: If you want to replace a placeholder with an actual image from JS, you can do it like this example:
-    // photos[0].innerHTML = '<img src="path/to/your/photo.jpg" alt="..." /> <div class="caption">Your caption</div>';
   </script>
-
-  <!--
-    Petunjuk singkat:
-    - Untuk menambahkan foto nyata: buka tag <div class="photo"> dan ganti isi (svg placeholder) dengan <img src="path/to/photo.jpg" alt="...">.
-    - Atau ubah attribute data-src ke URL gambar; script akan menampilkan placeholder clone untuk demo. Jika Anda ingin agar lightbox menampilkan gambar nyata dari data-src, ubah kondisinya di JS (file kecil ini dibuat supaya mudah diedit).
-    - Simpan file ini sebagai photo-wall-memory.html dan buka di browser.
-  -->
 </body>
 </html>
-
-
