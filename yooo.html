@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo Wall Memory — Oryza & Stefhani</title>
+  <style>
+    :root{
+      --bg1: #ffeef2; /* soft pink */
+      --bg2: #ffd6e6;
+      --card: #ffffff;
+      --accent: #ff7aa2;
+      --muted: #8b6a74;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      -webkit-font-smoothing:antialiased;
+      color:#3b2a2f;
+      padding:24px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:1000px;
+      background:transparent;
+    }
+
+    header{
+      text-align:center;
+      margin-bottom:20px;
+    }
+    .title{
+      display:inline-block;
+      padding:14px 20px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.65);
+      backdrop-filter: blur(6px);
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    }
+    .title h1{font-size:20px;margin:0;letter-spacing:0.3px}
+    .subtitle{font-size:13px;color:var(--muted);margin-top:6px}
+
+    /* grid */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+      gap:14px;
+    }
+
+    .photo{
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(135deg,#fff 0%, #fff0 60%);
+      box-shadow:0 6px 18px rgba(48,24,34,0.06);
+      cursor:pointer;
+      min-height:140px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .photo .caption{
+      position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.35));color:#fff;font-size:13px
+    }
+
+    /* hint */
+    .hint{margin:12px 0 18px;color:#5b3b41;font-size:14px;text-align:center}
+
+    /* modal/lightbox */
+    .lightbox{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;z-index:999;
+      background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));
+    }
+    .lightbox.open{display:flex}
+    .lb-card{
+      max-width:940px;width:100%;max-height:90vh;border-radius:12px;background:var(--card);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);display:flex;flex-direction:column
+    }
+    .lb-media{flex:1;display:flex;align-items:center;justify-content:center;background:#000}
+    .lb-media img{max-width:100%;max-height:80vh;object-fit:contain}
+    .lb-meta{padding:12px 14px;border-top:1px solid #f0e6e8;display:flex;align-items:center;justify-content:space-between}
+    .lb-meta .text{font-size:14px;color:#35272a}
+    .lb-meta .controls{display:flex;gap:8px}
+
+    .btn{appearance:none;border:0;padding:8px 12px;border-radius:10px;background:linear-gradient(180deg,var(--accent),#ff5d87);color:#fff;font-weight:600;cursor:pointer}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2);font-weight:600}
+    .icon-btn{background:transparent;border:0;padding:8px;border-radius:8px;color:var(--muted);cursor:pointer}
+
+    /* responsive tweaks */
+    @media (max-width:520px){
+      .title h1{font-size:16px}
+      .grid{gap:10px}
+    }
+
+    /* placeholder style when using inline svg */
+    .placeholder{display:flex;align-items:center;justify-content:center;height:100%;width:100%;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>Oryza P Ginting &amp; stefhani L L S Haloho</h1>
+        <div class="subtitle">Photo Wall Memory — kenangan kita dalam satu tempat</div>
+      </div>
+    </header>
+
+    <div class="hint">Klik foto untuk melihat lebih besar. Ganti placeholder dengan foto kalian (lihat komentar di kode).</div>
+
+    <main>
+      <div class="grid" id="grid">
+        <!-- Photo items: ganti atribut data-src dan data-caption dengan foto kalian. -->
+
+        <!-- Contoh placeholder menggunakan inline SVG. Untuk mengganti foto, ubah data-src ke URL gambar (mis. "images/photo1.jpg") dan tambahkan <img> tag di dalam .photo. -->
+
+        <div class="photo" tabindex="0" data-src="images/photo1.jpg" data-caption="Pertama kali ketemu — 12 Maret">
+          <!-- Replace this SVG with an <img src="..."> when you add real photos -->
+          <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#ffd6e6" />
+                <stop offset="1" stop-color="#ffeef2" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#g1)" />
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="38" fill="#b25a78">Foto 1</text>
+          </svg>
+          <div class="caption">Pertama kali ketemu — 12 Maret</div>
+        </div>
+
+        <div class="photo" tabindex="0" data-src="images/photo2.jpg" data-caption="Nonton bareng — bioskop mal">
+          <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#ffeef2" />
+                <stop offset="1" stop-color="#fff0" />
+              </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#g2)" />
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#b25a78">Foto 2</text>
+          </svg>
+          <div class="caption">Nonton bareng — bioskop</div>
+        </div>
+
+        <div class="photo" tabindex="0" data-src="images/photo3.jpg" data-caption="Ulang tahunmu — 20 Juni">
+          <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#fff0" />
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#b25a78">Foto 3</text>
+          </svg>
+          <div class="caption">Ulang tahunmu — 20 Juni</div>
+        </div>
+
+        <div class="photo" tabindex="0" data-src="images/photo4.jpg" data-caption="Liburan bersama — pantai">
+          <svg width="100%" height="100%" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#ffdfe9" />
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#b25a78">Foto 4</text>
+          </svg>
+          <div class="caption">Liburan bersama — pantai</div>
+        </div>
+
+        <!-- Tambah lebih banyak .photo sesuai kebutuhan -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Lightbox / modal -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-card" role="dialog" aria-modal="true" aria-labelledby="lb-caption">
+      <div class="lb-media" id="lb-media">
+        <!-- image injected here -->
+      </div>
+      <div class="lb-meta">
+        <div class="text" id="lb-caption">Caption</div>
+        <div class="controls">
+          <button class="icon-btn" id="prev" title="Sebelumnya">◀</button>
+          <button class="icon-btn" id="next" title="Berikutnya">▶</button>
+          <button class="btn" id="close">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Basic lightbox logic
+    const photos = Array.from(document.querySelectorAll('.photo'));
+    const lb = document.getElementById('lightbox');
+    const lbMedia = document.getElementById('lb-media');
+    const lbCaption = document.getElementById('lb-caption');
+    let currentIndex = 0;
+
+    function openLightbox(index){
+      const item = photos[index];
+      const src = item.dataset.src;
+      const caption = item.dataset.caption || '';
+
+      lbMedia.innerHTML = '';
+      // If user provides a real src (not placeholder), use <img>. Otherwise clone innerHTML placeholder.
+      if(src && !src.startsWith('images/')){
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = caption;
+        lbMedia.appendChild(img);
+      } else {
+        // clone the photo content (placeholder) for demo
+        const clone = item.querySelector('svg') ? item.querySelector('svg').cloneNode(true) : null;
+        if(clone) lbMedia.appendChild(clone);
+      }
+
+      lbCaption.textContent = caption;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden','false');
+      currentIndex = index;
+    }
+
+    function closeLightbox(){
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden','true');
+      lbMedia.innerHTML = '';
+    }
+
+    photos.forEach((p, idx) => {
+      p.addEventListener('click', ()=> openLightbox(idx));
+      p.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openLightbox(idx)});
+    });
+
+    document.getElementById('close').addEventListener('click', closeLightbox);
+    document.getElementById('prev').addEventListener('click', ()=> openLightbox((currentIndex-1+photos.length)%photos.length));
+    document.getElementById('next').addEventListener('click', ()=> openLightbox((currentIndex+1)%photos.length));
+
+    // close when clicking outside card
+    lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
+
+    // keyboard nav
+    document.addEventListener('keydown', (e)=>{
+      if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') document.getElementById('prev').click();
+      if(e.key === 'ArrowRight') document.getElementById('next').click();
+    });
+
+    // Helper: If you want to replace a placeholder with an actual image from JS, you can do it like this example:
+    // photos[0].innerHTML = '<img src="path/to/your/photo.jpg" alt="..." /> <div class="caption">Your caption</div>';
+  </script>
+
+  <!--
+    Petunjuk singkat:
+    - Untuk menambahkan foto nyata: buka tag <div class="photo"> dan ganti isi (svg placeholder) dengan <img src="path/to/photo.jpg" alt="...">.
+    - Atau ubah attribute data-src ke URL gambar; script akan menampilkan placeholder clone untuk demo. Jika Anda ingin agar lightbox menampilkan gambar nyata dari data-src, ubah kondisinya di JS (file kecil ini dibuat supaya mudah diedit).
+    - Simpan file ini sebagai photo-wall-memory.html dan buka di browser.
+  -->
+</body>
+</html>
